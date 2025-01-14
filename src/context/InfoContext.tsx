@@ -10,13 +10,15 @@ interface PersonalInfo {
     description: string;
     tech: string[];
   }>;
-  social?: {
-    github?: string;
-    linkedin?: string;
+  social: {
+    github: string;
+    linkedin: string;
+    instagram: string;
     twitter?: string;
   };
   email?: string;
   currentlyViewing?: string;
+  description?: string;
 }
 
 interface InfoContextType {
@@ -28,9 +30,15 @@ interface InfoContextType {
 const InfoContext = createContext<InfoContextType | undefined>(undefined);
 
 const BASIC_INFO = {
-  name: "Emin",
+  name: "Emin Demirci",
   role: "Full Stack Developer",
-  location: "Your Location",
+  location: "Konya, Türkiye",
+  email: "",
+  social: {
+    github: "https://github.com/Ztaclie",
+    linkedin: "https://www.linkedin.com/in/mehmet-emin-demirci-ztac/",
+    instagram: "https://instagram.com/cyber_ztac",
+  },
 };
 
 export const InfoProvider = ({ children }: { children: ReactNode }) => {

@@ -2,24 +2,43 @@ import { FC, useEffect } from "react";
 import { useInfo } from "../../context/InfoContext";
 import { useInView } from "react-intersection-observer";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "lucide-react";
 
 const ContactSection: FC = () => {
-  const { updateInfo, setCurrentlyViewing } = useInfo();
+  const { updateInfo, setCurrentlyViewing, info } = useInfo();
   const { ref, inView } = useInView({ threshold: 0.5 });
 
   useEffect(() => {
     if (inView) {
       setCurrentlyViewing("contact");
       updateInfo({
-        email: "your@email.com",
         social: {
-          github: "https://github.com/yourusername",
-          linkedin: "https://linkedin.com/in/yourusername",
-          twitter: "https://twitter.com/yourusername",
+          github: "https://github.com/Ztaclie",
+          linkedin: "https://www.linkedin.com/in/mehmet-emin-demirci-ztac/",
+          instagram: "https://instagram.com/cyber_ztac",
         },
+        email: "emindemirci.dev@gmail.com",
       });
     }
   }, [inView]);
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: <GithubIcon className="w-6 h-6" />,
+      url: info.social?.github,
+    },
+    {
+      name: "LinkedIn",
+      icon: <LinkedinIcon className="w-6 h-6" />,
+      url: info.social?.linkedin,
+    },
+    {
+      name: "Instagram",
+      icon: <InstagramIcon className="w-6 h-6" />,
+      url: info.social?.instagram,
+    },
+  ];
 
   return (
     <section
@@ -32,7 +51,38 @@ const ContactSection: FC = () => {
           <EnvelopeIcon className="w-8 h-8" />
           <h2 className="text-3xl font-bold cyber-gradient-text">Contact</h2>
         </div>
-        {/* Your contact content with animations */}
+
+        <div className="space-y-8">
+          <div className="animate-slideUp">
+            <h3 className="text-xl font-bold mb-4">Let's Connect!</h3>
+            <p className="mb-2">Feel free to reach out to me at:</p>
+            <a
+              href={`mailto:${info.email}`}
+              className="cyber-button inline-block"
+            >
+              {info.email}
+            </a>
+          </div>
+
+          <div className="animate-slideUp animation-delay-200">
+            <h3 className="text-xl font-bold mb-4">Social Links</h3>
+            <div className="flex flex-wrap gap-4">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cyber-button flex items-center gap-2"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {link.icon}
+                  <span>{link.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

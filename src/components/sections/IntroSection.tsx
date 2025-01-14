@@ -4,15 +4,17 @@ import { useInView } from "react-intersection-observer";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 const IntroSection: FC = () => {
-  const { updateInfo, setCurrentlyViewing } = useInfo();
+  const { updateInfo, setCurrentlyViewing, info } = useInfo();
   const { ref, inView } = useInView({ threshold: 0.5 });
 
   useEffect(() => {
     if (inView) {
       setCurrentlyViewing("intro");
       updateInfo({
-        role: "Full Stack Developer",
-        location: "Your Location",
+        role: "Full Stack Web Developer",
+        location: "Konya, Türkiye",
+        description:
+          "I'm a Full-Stack Web Developer and Product Manager at Clomosy, with 2 years of experience in Delphi FMX and web development.",
       });
     }
   }, [inView]);
@@ -31,7 +33,12 @@ const IntroSection: FC = () => {
         <h1 className="text-4xl md:text-6xl font-bold mb-6 cyber-gradient-text animate-slideUp">
           Hi, I'm Emin
         </h1>
-        <p className="text-xl md:text-2xl animate-slideUp animation-delay-200">Full Stack Developer</p>
+        <p className="text-xl md:text-2xl mb-4 animate-slideUp animation-delay-200">
+          Full Stack Web Developer
+        </p>
+        <p className="text-lg animate-slideUp animation-delay-200">
+          {info.description}
+        </p>
       </div>
     </section>
   );

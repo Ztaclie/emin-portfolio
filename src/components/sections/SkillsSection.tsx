@@ -14,10 +14,23 @@ const SkillsSection: FC = () => {
         skills: [
           "TypeScript",
           "React",
+          "JavaScript",
           "Node.js",
-          "Redux",
-          "Tailwind CSS"
-        ]
+          "C#",
+          "Python",
+          "HTML5",
+          "CSS3",
+          "MongoDB",
+          "MySQL",
+          "SQLite",
+          "Microsoft SQL Server",
+          "Firebase",
+          "Delphi FMX",
+          "Git",
+          "Chart.js",
+          "Figma",
+          "Canva",
+        ],
       });
     }
   }, [inView]);
@@ -34,15 +47,17 @@ const SkillsSection: FC = () => {
           <h2 className="text-3xl font-bold cyber-gradient-text">Skills</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {["TypeScript", "React", "Node.js", "Redux", "Tailwind CSS"].map((skill, index) => (
-            <div 
-              key={skill} 
-              className="cyber-card animate-slideUp"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {skill}
-            </div>
-          ))}
+          {["TypeScript", "React", "Node.js", "Redux", "Tailwind CSS"].map(
+            (skill, index) => (
+              <div
+                key={skill}
+                className="cyber-card animate-slideUp"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {skill}
+              </div>
+            )
+          )}
         </div>
       </div>
     </section>
