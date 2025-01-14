@@ -14,13 +14,37 @@ function App() {
 
   return (
     <InfoProvider>
-      <div className="min-h-screen bg-cyber-dark text-cyber-neon">
-        <nav className="fixed w-full p-4 backdrop-blur-sm bg-cyber-darker/70 border-b border-cyber-neon/20 z-50">
+      <div
+        className={`min-h-screen ${
+          darkMode
+            ? "bg-cyber-dark-bg text-cyber-dark-neon"
+            : "bg-cyber-light-bg text-cyber-light-neon"
+        }`}
+      >
+        <nav
+          className={`fixed w-full p-4 backdrop-blur-sm z-50 border-b ${
+            darkMode
+              ? "bg-cyber-dark-darker/70 border-cyber-dark-neon/20"
+              : "bg-cyber-light-darker/70 border-cyber-light-neon/20"
+          }`}
+        >
           <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-2xl font-bold cyber-gradient-text">Emin</h1>
+            <h1
+              className={`text-2xl font-bold ${
+                darkMode
+                  ? "from-cyber-dark-neon via-cyber-dark-purple to-cyber-dark-pink"
+                  : "from-cyber-light-neon via-cyber-light-purple to-cyber-light-pink"
+              } bg-gradient-to-r bg-clip-text text-transparent`}
+            >
+              Emin
+            </h1>
             <button
               onClick={() => dispatch(toggleTheme())}
-              className="cyber-button"
+              className={`px-6 py-2 border-2 transition-all duration-300 ${
+                darkMode
+                  ? "border-cyber-dark-neon text-cyber-dark-neon hover:bg-cyber-dark-neon hover:text-cyber-dark-bg shadow-[0_0_10px_theme(colors.cyber-dark.neon)] hover:shadow-[0_0_20px_theme(colors.cyber-dark.neon)]"
+                  : "border-cyber-light-neon text-cyber-light-neon hover:bg-cyber-light-neon hover:text-cyber-light-bg shadow-[0_0_10px_theme(colors.cyber-light.neon)] hover:shadow-[0_0_20px_theme(colors.cyber-light.neon)]"
+              }`}
             >
               {darkMode ? (
                 <SunIcon className="h-6 w-6" />
@@ -31,7 +55,7 @@ function App() {
           </div>
         </nav>
 
-        <main className="container mx-auto pt-24 pr-[28rem]">
+        <main className="container mx-auto pt-24 pr-[32rem]">
           <IntroSection />
           <SkillsSection />
           <ProjectsSection />

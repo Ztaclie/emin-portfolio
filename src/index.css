@@ -9,16 +9,15 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: theme("colors.dracula.current-line");
+  @apply bg-cyber-light-darker dark:bg-cyber-dark-darker;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: theme("colors.dracula.comment");
-  border-radius: 4px;
+  @apply bg-cyber-light-neon/30 dark:bg-cyber-dark-neon/30 rounded;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: theme("colors.dracula.purple");
+  @apply bg-cyber-light-neon/50 dark:bg-cyber-dark-neon/50;
 }
 
 @layer base {
@@ -29,20 +28,30 @@
 
 @layer components {
   .cyber-button {
-    @apply px-6 py-2 bg-cyber-dark border-2 border-cyber-neon text-cyber-neon 
-           hover:bg-cyber-neon hover:text-cyber-dark transition-all duration-300
-           shadow-[0_0_10px_theme(colors.cyber.neon)] hover:shadow-[0_0_20px_theme(colors.cyber.neon)];
+    @apply px-6 py-2 border-2 transition-all duration-300;
+    @apply dark:border-cyber-dark-neon dark:text-cyber-dark-neon 
+           dark:hover:bg-cyber-dark-neon dark:hover:text-cyber-dark-bg
+           dark:shadow-[0_0_10px_theme(colors.cyber-dark.neon)]
+           dark:hover:shadow-[0_0_20px_theme(colors.cyber-dark.neon)];
+    @apply border-cyber-light-neon text-cyber-light-neon 
+           hover:bg-cyber-light-neon hover:text-cyber-light-bg
+           shadow-[0_0_10px_theme(colors.cyber-light.neon)]
+           hover:shadow-[0_0_20px_theme(colors.cyber-light.neon)];
   }
 
   .cyber-card {
-    @apply bg-cyber-darker border border-cyber-neon/30 rounded-lg p-6
-           shadow-[0_0_10px_theme(colors.cyber.neon/20)]
-           hover:shadow-[0_0_20px_theme(colors.cyber.neon/30)]
-           transition-all duration-300;
+    @apply p-6 rounded-lg transition-all duration-300;
+    @apply dark:bg-cyber-dark-darker dark:border-cyber-dark-neon/30
+           dark:shadow-[0_0_10px_theme(colors.cyber-dark.neon/20)]
+           dark:hover:shadow-[0_0_20px_theme(colors.cyber-dark.neon/30)];
+    @apply bg-cyber-light-darker border-cyber-light-neon/30
+           shadow-[0_0_10px_theme(colors.cyber-light.neon/20)]
+           hover:shadow-[0_0_20px_theme(colors.cyber-light.neon/30)];
   }
 
   .cyber-gradient-text {
-    @apply bg-gradient-to-r from-cyber-neon via-cyber-purple to-cyber-pink 
-           bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r;
+    @apply dark:from-cyber-dark-neon dark:via-cyber-dark-purple dark:to-cyber-dark-pink;
+    @apply from-cyber-light-neon via-cyber-light-purple to-cyber-light-pink;
   }
 }

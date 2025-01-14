@@ -4,13 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        cyber: {
+        "cyber-dark": {
           neon: "#0ff",
           pink: "#ff2a6d",
           purple: "#8a2be2",
           yellow: "#ffb800",
-          dark: "#1a1a2e",
+          bg: "#1a1a2e",
           darker: "#15151e",
+        },
+        "cyber-light": {
+          neon: "#00a8a8",
+          pink: "#d81159",
+          purple: "#6b1fb1",
+          yellow: "#cc9000",
+          bg: "#e6e6f0",
+          darker: "#d4d4e8",
         },
         dracula: {
           background: "#282a36",

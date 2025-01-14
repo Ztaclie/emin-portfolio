@@ -1,8 +1,10 @@
 import { FC } from "react";
 import { useInfo } from "../context/InfoContext";
+import { useAppSelector } from "../store/hooks";
 
 const Hero: FC = () => {
   const { info } = useInfo();
+  const darkMode = useAppSelector((state) => state.theme.darkMode);
 
   const formatWithSyntaxHighlight = (obj: any) => {
     // Remove currentlyViewing from displayed object
@@ -17,12 +19,28 @@ const Hero: FC = () => {
         const [key, ...value] = line.split(":");
         return (
           <span key={i}>
-            <span className="text-dracula-cyan">{key}</span>
-            <span className="text-dracula-foreground">:</span>
+            <span className={darkMode ? "text-dracula-cyan" : "text-blue-600"}>
+              {key}
+            </span>
+            <span
+              className={darkMode ? "text-dracula-foreground" : "text-gray-800"}
+            >
+              :
+            </span>
             {value.join(":").includes("{") || value.join(":").includes("[") ? (
-              <span className="text-dracula-foreground">{value}</span>
+              <span
+                className={
+                  darkMode ? "text-dracula-foreground" : "text-gray-800"
+                }
+              >
+                {value}
+              </span>
             ) : (
-              <span className="text-dracula-green">{value}</span>
+              <span
+                className={darkMode ? "text-dracula-green" : "text-green-600"}
+              >
+                {value}
+              </span>
             )}
             {"\n"}
           </span>
@@ -36,7 +54,10 @@ const Hero: FC = () => {
         line.includes("]")
       ) {
         return (
-          <span key={i} className="text-dracula-foreground">
+          <span
+            key={i}
+            className={darkMode ? "text-dracula-foreground" : "text-gray-800"}
+          >
             {line}
             {"\n"}
           </span>
@@ -52,24 +73,56 @@ const Hero: FC = () => {
   };
 
   return (
-    <div className="fixed top-24 right-4 w-96 h-[calc(100vh-8rem)]">
-      <div className="w-full h-full bg-dracula-background rounded-lg overflow-hidden shadow-xl border border-dracula-purple/30">
-        <div className="flex items-center gap-2 px-4 py-2 bg-dracula-current-line">
+    <div className="fixed top-24 right-4 w-[32rem] h-[calc(100vh-8rem)]">
+      <div
+        className={`w-full h-full ${
+          darkMode ? "bg-dracula-background" : "bg-white"
+        } 
+                      rounded-lg overflow-hidden shadow-xl 
+                      ${
+                        darkMode
+                          ? "border-dracula-purple/30"
+                          : "border-gray-200"
+                      } border`}
+      >
+        <div
+          className={`flex items-center gap-2 px-4 py-2 
+                        ${
+                          darkMode ? "bg-dracula-current-line" : "bg-gray-100"
+                        }`}
+        >
           <div className="flex gap-1">
             <div className="w-3 h-3 rounded-full bg-dracula-red"></div>
             <div className="w-3 h-3 rounded-full bg-dracula-yellow"></div>
             <div className="w-3 h-3 rounded-full bg-dracula-green"></div>
           </div>
-          <span className="text-dracula-comment font-cyber">
+          <span
+            className={`font-cyber ${
+              darkMode ? "text-dracula-comment" : "text-gray-500"
+            }`}
+          >
             personalInfo.ts
           </span>
         </div>
         <div className="p-4 font-cyber overflow-y-auto h-[calc(100%-2.5rem)] custom-scrollbar">
           <pre className="whitespace-pre-wrap">
-            <span className="text-dracula-pink">const</span>
-            <span className="text-dracula-foreground"> personalInfo = </span>
+            <span
+              className={darkMode ? "text-dracula-pink" : "text-purple-600"}
+            >
+              const
+            </span>
+            <span
+              className={darkMode ? "text-dracula-foreground" : "text-gray-800"}
+            >
+              {" "}
+              personalInfo ={" "}
+            </span>
             {formatWithSyntaxHighlight(info)}
-            <span className="text-dracula-foreground">;</span>
+            <span
+              className={darkMode ? "text-dracula-foreground" : "text-gray-800"}
+            >
+              ;
+            </span>
           </pre>
         </div>
       </div>
