@@ -6,12 +6,21 @@ const SkillsSection: FC = () => {
   const { updateInfo, setCurrentlyViewing } = useInfo();
   const { ref, inView } = useInView({ threshold: 0.5 });
 
+  const skills = [
+    "TypeScript",
+    "React",
+    "Node.js",
+    "Redux",
+    "Tailwind CSS",
+    "Next.js",
+    "PostgreSQL",
+    "MongoDB",
+  ];
+
   useEffect(() => {
     if (inView) {
       setCurrentlyViewing("skills");
-      updateInfo({
-        skills: ["TypeScript", "React", "Node.js", "Redux", "Tailwind CSS"],
-      });
+      updateInfo({ skills });
     }
   }, [inView]);
 
@@ -23,16 +32,14 @@ const SkillsSection: FC = () => {
       <div>
         <h2 className="text-3xl font-bold mb-8">Skills</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {["TypeScript", "React", "Node.js", "Redux", "Tailwind CSS"].map(
-            (skill) => (
-              <div
-                key={skill}
-                className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg"
-              >
-                {skill}
-              </div>
-            )
-          )}
+          {skills.map((skill) => (
+            <div
+              key={skill}
+              className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-800 dark:text-gray-200"
+            >
+              {skill}
+            </div>
+          ))}
         </div>
       </div>
     </section>

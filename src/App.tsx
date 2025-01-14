@@ -4,6 +4,8 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 import Hero from "./components/Hero";
 import IntroSection from "./components/sections/IntroSection";
 import SkillsSection from "./components/sections/SkillsSection";
+import ProjectsSection from "./components/sections/ProjectsSection";
+import ContactSection from "./components/sections/ContactSection";
 import { InfoProvider } from "./context/InfoContext";
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
         <main className="container mx-auto pt-24 pr-[28rem]">
           <IntroSection />
           <SkillsSection />
+          <ProjectsSection />
+          <ContactSection />
         </main>
 
         <Hero />
