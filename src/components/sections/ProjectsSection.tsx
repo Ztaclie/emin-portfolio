@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import { useInfo } from "../../context/InfoContext";
 import { useInView } from "react-intersection-observer";
+import { RocketLaunchIcon } from "@heroicons/react/24/outline";
 
 const ProjectsSection: FC = () => {
   const { updateInfo, setCurrentlyViewing } = useInfo();
@@ -28,10 +29,15 @@ const ProjectsSection: FC = () => {
       ref={ref}
       className="min-h-screen flex items-center justify-start pl-8"
     >
-      <div className="w-full">
-        <h2 className="text-3xl font-bold mb-8 cyber-gradient-text">Projects</h2>
+      <div className="w-full animate-fadeIn">
+        <div className="flex items-center gap-4 mb-8">
+          <RocketLaunchIcon className="w-8 h-8" />
+          <h2 className="text-3xl font-bold cyber-gradient-text">Projects</h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Your projects content */}
+          <div className="cyber-card animate-slideUp">
+            {/* Project content */}
+          </div>
         </div>
       </div>
     </section>

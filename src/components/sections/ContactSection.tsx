@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import { useInfo } from "../../context/InfoContext";
 import { useInView } from "react-intersection-observer";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 
 const ContactSection: FC = () => {
   const { updateInfo, setCurrentlyViewing } = useInfo();
@@ -26,9 +27,12 @@ const ContactSection: FC = () => {
       ref={ref}
       className="min-h-screen flex items-center justify-start pl-8"
     >
-      <div>
-        <h2 className="text-3xl font-bold mb-8 cyber-gradient-text">Contact</h2>
-        {/* Your contact content */}
+      <div className="animate-fadeIn">
+        <div className="flex items-center gap-4 mb-8">
+          <EnvelopeIcon className="w-8 h-8" />
+          <h2 className="text-3xl font-bold cyber-gradient-text">Contact</h2>
+        </div>
+        {/* Your contact content with animations */}
       </div>
     </section>
   );
