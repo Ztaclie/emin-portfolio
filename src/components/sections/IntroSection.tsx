@@ -18,14 +18,15 @@ const IntroSection: FC = () => {
 
   return (
     <section
+      id="intro"
       ref={ref}
       className="min-h-screen flex items-center justify-start pl-8"
     >
       <div>
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">Hi, I'm Emin</h1>
-        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400">
-          Full Stack Developer
-        </p>
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 cyber-gradient-text">
+          Hi, I'm Emin
+        </h1>
+        <p className="text-xl md:text-2xl">Full Stack Developer</p>
       </div>
     </section>
   );

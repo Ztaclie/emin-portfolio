@@ -7,6 +7,7 @@ import SkillsSection from "./components/sections/SkillsSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
 import ContactSection from "./components/sections/ContactSection";
 import { InfoProvider } from "./context/InfoContext";
+import Navigation from "./components/Navigation";
 
 function App() {
   const darkMode = useAppSelector((state) => state.theme.darkMode);
@@ -54,6 +55,8 @@ function App() {
             </button>
           </div>
         </nav>
+
+        <Navigation />
 
         <main className="container mx-auto pt-24 pr-[32rem]">
           <IntroSection />
