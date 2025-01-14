@@ -14,7 +14,7 @@ function App() {
 
   return (
     <InfoProvider>
-      <div className={`min-h-screen bg-cyber-dark text-cyber-neon`}>
+      <div className="min-h-screen bg-cyber-dark text-cyber-neon">
         <nav className="fixed w-full p-4 backdrop-blur-sm bg-cyber-darker/70 border-b border-cyber-neon/20 z-50">
           <div className="container mx-auto flex justify-between items-center">
             <h1 className="text-2xl font-bold cyber-gradient-text">Emin</h1>
