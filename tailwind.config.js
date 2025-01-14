@@ -5,20 +5,18 @@ export default {
     extend: {
       colors: {
         "cyber-dark": {
+          bg: "#1a1a1a",
+          darker: "#252525",
           neon: "#0ff",
-          pink: "#ff2a6d",
-          purple: "#8a2be2",
-          yellow: "#ffb800",
-          bg: "#1a1a2e",
-          darker: "#15151e",
+          purple: "#bf00ff",
+          pink: "#ff00ff",
         },
         "cyber-light": {
-          neon: "#00a8a8",
-          pink: "#d81159",
-          purple: "#6b1fb1",
-          yellow: "#cc9000",
-          bg: "#e6e6f0",
-          darker: "#d4d4e8",
+          bg: "#ffffff",
+          darker: "#f0f0f0",
+          neon: "#00b4d8",
+          purple: "#7209b7",
+          pink: "#f72585",
         },
         dracula: {
           background: "#282a36",

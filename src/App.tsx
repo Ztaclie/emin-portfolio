@@ -18,8 +18,8 @@ function App() {
       <div
         className={`min-h-screen ${
           darkMode
-            ? "bg-cyber-dark-bg text-cyber-dark-neon"
-            : "bg-cyber-light-bg text-cyber-light-neon"
+            ? "bg-cyber-dark-bg text-gray-100"
+            : "bg-cyber-light-bg text-gray-900"
         }`}
       >
         <nav

@@ -19,26 +19,18 @@ const Hero: FC = () => {
         const [key, ...value] = line.split(":");
         return (
           <span key={i}>
-            <span className={darkMode ? "text-dracula-cyan" : "text-blue-600"}>
+            <span className={darkMode ? "text-cyan-300" : "text-blue-700"}>
               {key}
             </span>
-            <span
-              className={darkMode ? "text-dracula-foreground" : "text-gray-800"}
-            >
+            <span className={darkMode ? "text-gray-100" : "text-gray-900"}>
               :
             </span>
             {value.join(":").includes("{") || value.join(":").includes("[") ? (
-              <span
-                className={
-                  darkMode ? "text-dracula-foreground" : "text-gray-800"
-                }
-              >
+              <span className={darkMode ? "text-gray-100" : "text-gray-900"}>
                 {value}
               </span>
             ) : (
-              <span
-                className={darkMode ? "text-dracula-green" : "text-green-600"}
-              >
+              <span className={darkMode ? "text-green-300" : "text-green-700"}>
                 {value}
               </span>
             )}
