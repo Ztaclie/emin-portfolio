@@ -14,17 +14,13 @@ function App() {
 
   return (
     <InfoProvider>
-      <div
-        className={`min-h-screen ${
-          darkMode ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"
-        }`}
-      >
-        <nav className="fixed w-full p-4 backdrop-blur-sm bg-white/70 dark:bg-gray-900/70 z-50">
+      <div className={`min-h-screen bg-cyber-dark text-cyber-neon`}>
+        <nav className="fixed w-full p-4 backdrop-blur-sm bg-cyber-darker/70 border-b border-cyber-neon/20 z-50">
           <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Emin</h1>
+            <h1 className="text-2xl font-bold cyber-gradient-text">Emin</h1>
             <button
               onClick={() => dispatch(toggleTheme())}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="cyber-button"
             >
               {darkMode ? (
                 <SunIcon className="h-6 w-6" />

@@ -30,13 +30,10 @@ const SkillsSection: FC = () => {
       className="min-h-screen flex items-center justify-start pl-8"
     >
       <div>
-        <h2 className="text-3xl font-bold mb-8">Skills</h2>
+        <h2 className="text-3xl font-bold mb-8 cyber-gradient-text">Skills</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {skills.map((skill) => (
-            <div
-              key={skill}
-              className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-800 dark:text-gray-200"
-            >
+            <div key={skill} className="cyber-card">
               {skill}
             </div>
           ))}
