@@ -1,6 +1,7 @@
 import { useAppSelector, useAppDispatch } from "./store/hooks";
 import { toggleTheme } from "./store/themeSlice";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import Hero from "./components/Hero";
 
 function App() {
   const darkMode = useAppSelector((state) => state.theme.darkMode);
@@ -29,16 +30,7 @@ function App() {
       </nav>
 
       <main className="container mx-auto pt-24 px-4">
-        <section className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Hi, I'am Emin
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400">
-              A Full Stack Developer
-            </p>
-          </div>
-        </section>
+        <Hero />
       </main>
     </div>
   );
