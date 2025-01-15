@@ -1,10 +1,32 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useInfo } from "../context/InfoContext";
 import { useAppSelector } from "../store/hooks";
+import { useTypewriter } from "../hooks/useTypewriter";
 
 const Terminal: FC = () => {
   const { info } = useInfo();
   const darkMode = useAppSelector((state) => state.theme.darkMode);
+  const [currentCommand, setCurrentCommand] = useState("");
+  const [currentOutput, setCurrentOutput] = useState("");
+
+  const { displayText: typedCommand, isTyping: isTypingCommand } =
+    useTypewriter(currentCommand, 50);
+  const { displayText: typedOutput, isTyping: isTypingOutput } = useTypewriter(
+    currentOutput,
+    30,
+    { startDelay: isTypingCommand ? Infinity : 0 }
+  );
+
+  useEffect(() => {
+    setCurrentCommand(getTerminalCommand());
+    setCurrentOutput(getTerminalOutput());
+  }, [info.currentlyViewing]);
+
+  useEffect(() => {
+    const isTerminalTyping = isTypingCommand || isTypingOutput;
+    // You can create a callback prop or context to handle this
+    // For example: onTypingStatusChange(isTerminalTyping);
+  }, [isTypingCommand, isTypingOutput]);
 
   const getTerminalCommand = () => {
     switch (info.currentlyViewing) {
@@ -67,10 +89,10 @@ const Terminal: FC = () => {
             <div
               className={`${darkMode ? "text-green-400" : "text-green-600"}`}
             >
-              visitor@portfolio:~$ {getTerminalCommand()}
+              visitor@portfolio:~$ {typedCommand}
             </div>
             <div className={darkMode ? "text-gray-300" : "text-gray-700"}>
-              {getTerminalOutput()}
+              {typedOutput}
             </div>
             <div
               className={`animate-pulse ${
