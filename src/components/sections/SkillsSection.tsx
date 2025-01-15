@@ -51,7 +51,7 @@ const SkillsSection: FC = () => {
             (skill, index) => (
               <div
                 key={skill}
-                className="cyber-card animate-slideUp"
+                className="cyber-card animate-slideUp bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/50 transition-transform hover:scale-110"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {skill}

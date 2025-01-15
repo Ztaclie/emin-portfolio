@@ -17,7 +17,7 @@ const ContactSection: FC = () => {
           linkedin: "https://www.linkedin.com/in/mehmet-emin-demirci-ztac/",
           instagram: "https://instagram.com/cyber_ztac",
         },
-        email: "emindemirci.dev@gmail.com",
+        email: "eminfeg@gmail.com",
       });
     }
   }, [inView]);
@@ -58,7 +58,7 @@ const ContactSection: FC = () => {
             <p className="mb-2">Feel free to reach out to me at:</p>
             <a
               href={`mailto:${info.email}`}
-              className="cyber-button inline-block"
+              className="cyber-button inline-block bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/50 transition-transform hover:scale-110"
             >
               {info.email}
             </a>
@@ -73,7 +73,7 @@ const ContactSection: FC = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-button flex items-center gap-2"
+                  className="cyber-button flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/50 transition-transform hover:scale-110"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {link.icon}

@@ -48,7 +48,7 @@ const ProjectsSection: FC = () => {
           {info.projects?.map((project, index) => (
             <div
               key={project.name}
-              className="cyber-card animate-slideUp"
+              className="cyber-card animate-slideUp bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/50 transition-transform hover:scale-110"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <h3 className="text-xl font-bold mb-2">{project.name}</h3>
