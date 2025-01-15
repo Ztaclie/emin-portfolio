@@ -2,10 +2,14 @@ import { FC, useEffect } from "react";
 import { useInfo } from "../../context/InfoContext";
 import { useInView } from "react-intersection-observer";
 import { RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { useLoading } from "../../context/LoadingContext";
 
 const ProjectsSection: FC = () => {
   const { updateInfo, setCurrentlyViewing, info } = useInfo();
+  const { loadedSections } = useLoading();
   const { ref, inView } = useInView({ threshold: 0.5 });
+
+  const isLoaded = loadedSections.includes("projects");
 
   useEffect(() => {
     if (inView) {
@@ -32,6 +36,18 @@ const ProjectsSection: FC = () => {
       });
     }
   }, [inView]);
+
+  if (!isLoaded) {
+    return (
+      <section
+        id="projects"
+        ref={ref}
+        className="min-h-screen flex items-center justify-start pl-8"
+      >
+        <div className="animate-pulse w-full h-64 bg-cyan-500/10 rounded-lg" />
+      </section>
+    );
+  }
 
   return (
     <section

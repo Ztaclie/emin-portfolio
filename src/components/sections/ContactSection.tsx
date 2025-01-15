@@ -3,10 +3,14 @@ import { useInfo } from "../../context/InfoContext";
 import { useInView } from "react-intersection-observer";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "lucide-react";
+import { useLoading } from "../../context/LoadingContext";
 
 const ContactSection: FC = () => {
   const { updateInfo, setCurrentlyViewing, info } = useInfo();
+  const { loadedSections } = useLoading();
   const { ref, inView } = useInView({ threshold: 0.5 });
+
+  const isLoaded = loadedSections.includes("contact");
 
   useEffect(() => {
     if (inView) {
@@ -21,6 +25,18 @@ const ContactSection: FC = () => {
       });
     }
   }, [inView]);
+
+  if (!isLoaded) {
+    return (
+      <section
+        id="contact"
+        ref={ref}
+        className="min-h-screen flex items-center justify-start pl-8"
+      >
+        <div className="animate-pulse w-full h-64 bg-cyan-500/10 rounded-lg" />
+      </section>
+    );
+  }
 
   const socialLinks = [
     {

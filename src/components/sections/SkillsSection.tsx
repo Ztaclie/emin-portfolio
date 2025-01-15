@@ -2,10 +2,19 @@ import { FC, useEffect } from "react";
 import { useInfo } from "../../context/InfoContext";
 import { useInView } from "react-intersection-observer";
 import { WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
+import { useLoading } from "../../context/LoadingContext";
 
 const SkillsSection: FC = () => {
   const { updateInfo, setCurrentlyViewing } = useInfo();
+  const { loadedSections } = useLoading();
   const { ref, inView } = useInView({ threshold: 0.5 });
+
+  const isLoaded = loadedSections.includes("skills");
+
+  useEffect(() => {
+    console.log("Skills section loaded state:", isLoaded);
+    console.log("Current loaded sections:", loadedSections);
+  }, [isLoaded, loadedSections]);
 
   useEffect(() => {
     if (inView) {
@@ -34,6 +43,18 @@ const SkillsSection: FC = () => {
       });
     }
   }, [inView]);
+
+  if (!isLoaded) {
+    return (
+      <section
+        id="skills"
+        ref={ref}
+        className="min-h-screen flex items-center justify-start pl-8"
+      >
+        <div className="animate-pulse w-full h-64 bg-cyan-500/10 rounded-lg" />
+      </section>
+    );
+  }
 
   return (
     <section

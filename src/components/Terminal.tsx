@@ -2,12 +2,19 @@ import { FC, useEffect, useState } from "react";
 import { useInfo } from "../context/InfoContext";
 import { useAppSelector } from "../store/hooks";
 import { useTypewriter } from "../hooks/useTypewriter";
+import { useLoading } from "../context/LoadingContext";
 
-const Terminal: FC = () => {
+interface TerminalProps {
+  onCommandComplete: () => void;
+}
+
+const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
   const { info } = useInfo();
   const darkMode = useAppSelector((state) => state.theme.darkMode);
   const [currentCommand, setCurrentCommand] = useState("");
   const [currentOutput, setCurrentOutput] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+  const { setLoadedSection } = useLoading();
 
   const { displayText: typedCommand, isTyping: isTypingCommand } =
     useTypewriter(currentCommand, 50);
@@ -57,6 +64,69 @@ const Terminal: FC = () => {
         return "Welcome to my portfolio terminal! Scroll to navigate.";
     }
   };
+
+  const handleTypingComplete = (command: string) => {
+    // Remove any whitespace and convert to lowercase for consistent matching
+    const cleanCommand = command.trim().toLowerCase();
+
+    // Log for debugging
+    console.log("Command completed:", cleanCommand);
+
+    // Match commands more flexibly
+    if (cleanCommand.includes("skills") || cleanCommand.includes("./skills")) {
+      console.log("Loading skills section...");
+      setLoadedSection("skills");
+    }
+    if (
+      cleanCommand.includes("projects") ||
+      cleanCommand.includes("./projects")
+    ) {
+      console.log("Loading projects section...");
+      setLoadedSection("projects");
+    }
+    if (
+      cleanCommand.includes("contact") ||
+      cleanCommand.includes("./contact")
+    ) {
+      console.log("Loading contact section...");
+      setLoadedSection("contact");
+    }
+  };
+
+  const handleCommand = (command: string) => {
+    switch (command) {
+      case "ls ./skills":
+        setLoadedSection("skills");
+        break;
+      case "ls ./projects":
+        setLoadedSection("projects");
+        break;
+      case "ls ./contact":
+        setLoadedSection("contact");
+        break;
+    }
+  };
+
+  // Add this useEffect for testing
+  useEffect(() => {
+    // Simulate command completion after 2 seconds
+    const timer = setTimeout(() => {
+      console.log("Testing: Loading skills section...");
+      setLoadedSection("skills");
+
+      setTimeout(() => {
+        console.log("Testing: Loading projects section...");
+        setLoadedSection("projects");
+
+        setTimeout(() => {
+          console.log("Testing: Loading contact section...");
+          setLoadedSection("contact");
+        }, 1000);
+      }, 1000);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="fixed top-24 right-4 w-[32rem] h-[calc(100vh-8rem)]">
