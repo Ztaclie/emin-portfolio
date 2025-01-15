@@ -8,6 +8,7 @@ import ProjectsSection from "./components/sections/ProjectsSection";
 import ContactSection from "./components/sections/ContactSection";
 import { InfoProvider } from "./context/InfoContext";
 import Navigation from "./components/Navigation";
+import Terminal from "./components/Terminal";
 
 function App() {
   const darkMode = useAppSelector((state) => state.theme.darkMode);
@@ -65,7 +66,7 @@ function App() {
           <ContactSection />
         </main>
 
-        <Hero />
+        <Terminal />
       </div>
     </InfoProvider>
   );
