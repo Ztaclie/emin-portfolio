@@ -3,6 +3,7 @@ import { useInfo } from "../context/InfoContext";
 import { useAppSelector } from "../store/hooks";
 import { useTypewriter } from "../hooks/useTypewriter";
 import { useLoading } from "../context/LoadingContext";
+import { Link as ScrollLink } from "react-scroll";
 
 interface TerminalProps {
   onCommandComplete: () => void;
@@ -15,6 +16,7 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
   const [currentOutput, setCurrentOutput] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const { setLoadedSection } = useLoading();
+  const [manualCommand, setManualCommand] = useState<string | null>(null);
 
   const { displayText: typedCommand, isTyping: isTypingCommand } =
     useTypewriter(currentCommand, 50);
@@ -25,9 +27,14 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
   );
 
   useEffect(() => {
-    setCurrentCommand(getTerminalCommand());
+    if (manualCommand) {
+      setCurrentCommand(manualCommand);
+      setManualCommand(null);
+    } else {
+      setCurrentCommand(getTerminalCommand());
+    }
     setCurrentOutput(getTerminalOutput());
-  }, [info.currentlyViewing]);
+  }, [info.currentlyViewing, manualCommand]);
 
   useEffect(() => {
     const isTerminalTyping = isTypingCommand || isTypingOutput;
@@ -128,6 +135,16 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleNavClick = (section: string) => {
+    const commands = {
+      intro: "cd /about-me",
+      skills: "ls ./skills",
+      projects: "ls ./projects",
+      contact: "cat contact.txt",
+    };
+    setManualCommand(commands[section as keyof typeof commands]);
+  };
+
   return (
     <div className="fixed top-24 right-4 w-[32rem] h-[calc(100vh-8rem)]">
       <div
@@ -154,7 +171,7 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
             terminal
           </span>
         </div>
-        <div className="p-4 font-cyber overflow-y-auto h-[calc(100%-2.5rem)] custom-scrollbar">
+        <div className="p-4 font-cyber overflow-y-auto h-[calc(100%-6rem)] custom-scrollbar">
           <div className="space-y-4">
             <div
               className={`${darkMode ? "text-green-400" : "text-green-600"}`}
@@ -172,6 +189,44 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
               visitor@portfolio:~$ █
             </div>
           </div>
+        </div>
+        <div className="h-14 border-t border-cyan-500/20 flex items-center justify-center gap-4 px-4">
+          <ScrollLink
+            to="intro"
+            smooth={true}
+            duration={500}
+            className="cyber-button text-sm py-1"
+            onClick={() => handleNavClick("intro")}
+          >
+            About
+          </ScrollLink>
+          <ScrollLink
+            to="skills"
+            smooth={true}
+            duration={500}
+            className="cyber-button text-sm py-1"
+            onClick={() => handleNavClick("skills")}
+          >
+            Skills
+          </ScrollLink>
+          <ScrollLink
+            to="projects"
+            smooth={true}
+            duration={500}
+            className="cyber-button text-sm py-1"
+            onClick={() => handleNavClick("projects")}
+          >
+            Projects
+          </ScrollLink>
+          <ScrollLink
+            to="contact"
+            smooth={true}
+            duration={500}
+            className="cyber-button text-sm py-1"
+            onClick={() => handleNavClick("contact")}
+          >
+            Contact
+          </ScrollLink>
         </div>
       </div>
     </div>
