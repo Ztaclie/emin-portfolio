@@ -70,8 +70,12 @@ const ContactSection: FC = () => {
 
         <div className="space-y-8">
           <div className="animate-slideUp">
-            <h3 className="text-xl font-bold mb-4">Let's Connect!</h3>
-            <p className="mb-2">Feel free to reach out to me at:</p>
+            <h3 className="text-xl font-bold mb-4 cyber-gradient-text">
+              Let's Connect!
+            </h3>
+            <p className="mb-2 cyber-gradient-text">
+              Feel free to reach out to me at:
+            </p>
             <a
               href={`mailto:${info.email}`}
               className="cyber-button inline-block bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/50 transition-transform hover:scale-110"
@@ -81,7 +85,9 @@ const ContactSection: FC = () => {
           </div>
 
           <div className="animate-slideUp animation-delay-200">
-            <h3 className="text-xl font-bold mb-4">Social Links</h3>
+            <h3 className="text-xl font-bold mb-4 cyber-gradient-text">
+              Social Links
+            </h3>
             <div className="flex flex-wrap gap-4">
               {socialLinks.map((link, index) => (
                 <a
@@ -89,7 +95,7 @@ const ContactSection: FC = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cyber-button flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/50 transition-transform hover:scale-110"
+                  className="cyber-button flex items-center gap-2"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {link.icon}

@@ -55,6 +55,10 @@
 @layer components {
   .cyber-button {
     @apply px-6 py-2 border-2 transition-all duration-300;
+    @apply bg-gradient-to-r from-cyan-500/20 to-blue-500/20;
+    @apply hover:from-cyan-500/30 hover:to-blue-500/30;
+    @apply border-cyan-500/50;
+    @apply transition-transform hover:scale-110;
     /* Dark mode */
     @apply dark:border-cyber-dark-neon dark:text-cyber-dark-neon 
            dark:hover:bg-cyber-dark-neon dark:hover:text-cyber-dark-bg;
@@ -67,12 +71,13 @@
 
   .cyber-card {
     @apply p-6 rounded-lg transition-all duration-300;
+    @apply bg-gradient-to-r from-cyan-500/20 to-blue-500/20;
+    @apply hover:from-cyan-500/30 hover:to-blue-500/30;
+    @apply border border-cyan-500/50;
     /* Dark mode */
-    @apply dark:bg-cyber-dark-darker dark:border-cyber-dark-neon/30
-           dark:text-white;
+    @apply dark:border-cyber-dark-neon/50 dark:text-cyber-dark-neon;
     /* Light mode */
-    @apply bg-cyber-light-darker border-cyber-light-neon/30
-           text-gray-900;
+    @apply border-cyber-light-neon/50 text-cyber-light-neon;
   }
 
   .cyber-gradient-text {
