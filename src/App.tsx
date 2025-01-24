@@ -15,40 +15,26 @@ function App() {
   const darkMode = useAppSelector((state) => state.theme.darkMode);
   const dispatch = useAppDispatch();
 
+  const themeClasses = darkMode
+    ? "bg-cyber-dark-bg text-gray-100"
+    : "bg-cyber-light-bg text-gray-900";
+
   return (
     <LoadingProvider>
       <InfoProvider>
-        <div
-          className={`min-h-screen ${
-            darkMode
-              ? "bg-cyber-dark-bg text-gray-100"
-              : "bg-cyber-light-bg text-gray-900"
-          }`}
-        >
+        <div className={`min-h-screen ${themeClasses}`}>
           <nav
-            className={`fixed w-full p-4 backdrop-blur-sm z-50 border-b ${
-              darkMode
-                ? "bg-cyber-dark-darker/70 border-cyber-dark-neon/20"
-                : "bg-cyber-light-darker/70 border-cyber-light-neon/20"
-            }`}
+            className={`fixed w-full p-4 backdrop-blur-sm z-50 border-b ${themeClasses}`}
           >
             <div className="container mx-auto flex justify-between items-center">
               <h1
-                className={`text-2xl font-bold ${
-                  darkMode
-                    ? "from-cyber-dark-neon via-cyber-dark-purple to-cyber-dark-pink"
-                    : "from-cyber-light-neon via-cyber-light-purple to-cyber-light-pink"
-                } bg-gradient-to-r bg-clip-text text-transparent`}
+                className={`text-2xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${themeClasses}`}
               >
                 Emin
               </h1>
               <button
                 onClick={() => dispatch(toggleTheme())}
-                className={`px-6 py-2 border-2 transition-all duration-300 ${
-                  darkMode
-                    ? "border-cyber-dark-neon text-cyber-dark-neon hover:bg-cyber-dark-neon hover:text-cyber-dark-bg shadow-[0_0_10px_theme(colors.cyber-dark.neon)] hover:shadow-[0_0_20px_theme(colors.cyber-dark.neon)]"
-                    : "border-cyber-light-neon text-cyber-light-neon hover:bg-cyber-light-neon hover:text-cyber-light-bg shadow-[0_0_10px_theme(colors.cyber-light.neon)] hover:shadow-[0_0_20px_theme(colors.cyber-light.neon)]"
-                }`}
+                className={`px-6 py-2 border-2 transition-all duration-300 ${themeClasses}`}
               >
                 {darkMode ? (
                   <SunIcon className="h-6 w-6" />

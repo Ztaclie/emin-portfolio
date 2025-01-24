@@ -13,12 +13,9 @@ export const LoadingProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loadedSections, setLoadedSections] = useState<string[]>([]);
 
   const setLoadedSection = (section: string) => {
-    console.log("Setting loaded section:", section);
-    setLoadedSections((prev) => {
-      const newSections = [...prev, section];
-      console.log("Updated loaded sections:", newSections);
-      return newSections;
-    });
+    if (!loadedSections.includes(section)) {
+      setLoadedSections((prev) => [...prev, section]);
+    }
   };
 
   return (

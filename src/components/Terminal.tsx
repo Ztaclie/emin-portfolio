@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useCallback } from "react";
 import { useInfo } from "../context/InfoContext";
 import { useAppSelector } from "../store/hooks";
 import { useTypewriter } from "../hooks/useTypewriter";
@@ -26,14 +26,42 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
     { startDelay: isTypingCommand ? Infinity : 0 }
   );
 
-  useEffect(() => {
-    if (manualCommand) {
-      setCurrentCommand(manualCommand);
-      setManualCommand(null);
-    } else {
-      setCurrentCommand(getTerminalCommand());
+  const getCommandAndOutput = (viewing: string) => {
+    switch (viewing) {
+      case "intro":
+        return {
+          command: "cd /about-me",
+          output:
+            "📂 Current directory: /about-me\n→ Viewing profile information...",
+        };
+      case "skills":
+        return {
+          command: "ls ./skills",
+          output: "📂 Directory: /skills\n→ Displaying technical expertise...",
+        };
+      case "projects":
+        return {
+          command: "ls ./projects",
+          output: "📂 Directory: /projects\n→ Loading project portfolio...",
+        };
+      case "contact":
+        return {
+          command: "cat contact.txt",
+          output: "📂 Reading: contact.txt\n→ Loading contact information...",
+        };
+      default:
+        return {
+          command: "pwd",
+          output: "Welcome to my portfolio terminal! Scroll to navigate.",
+        };
     }
-    setCurrentOutput(getTerminalOutput());
+  };
+
+  useEffect(() => {
+    const { command, output } = getCommandAndOutput(info.currentlyViewing);
+    setCurrentCommand(manualCommand || command);
+    setCurrentOutput(output);
+    setManualCommand(null);
   }, [info.currentlyViewing, manualCommand]);
 
   useEffect(() => {
@@ -41,36 +69,6 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
     // You can create a callback prop or context to handle this
     // For example: onTypingStatusChange(isTerminalTyping);
   }, [isTypingCommand, isTypingOutput]);
-
-  const getTerminalCommand = () => {
-    switch (info.currentlyViewing) {
-      case "intro":
-        return "cd /about-me";
-      case "skills":
-        return "ls ./skills";
-      case "projects":
-        return "ls ./projects";
-      case "contact":
-        return "cat contact.txt";
-      default:
-        return "pwd";
-    }
-  };
-
-  const getTerminalOutput = () => {
-    switch (info.currentlyViewing) {
-      case "intro":
-        return "📂 Current directory: /about-me\n→ Viewing profile information...";
-      case "skills":
-        return "📂 Directory: /skills\n→ Displaying technical expertise...";
-      case "projects":
-        return "📂 Directory: /projects\n→ Loading project portfolio...";
-      case "contact":
-        return "📂 Reading: contact.txt\n→ Loading contact information...";
-      default:
-        return "Welcome to my portfolio terminal! Scroll to navigate.";
-    }
-  };
 
   const handleTypingComplete = (command: string) => {
     // Remove any whitespace and convert to lowercase for consistent matching
@@ -101,17 +99,8 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
   };
 
   const handleCommand = (command: string) => {
-    switch (command) {
-      case "ls ./skills":
-        setLoadedSection("skills");
-        break;
-      case "ls ./projects":
-        setLoadedSection("projects");
-        break;
-      case "ls ./contact":
-        setLoadedSection("contact");
-        break;
-    }
+    const section = command.split(" ")[1]?.replace("./", "");
+    if (section) setLoadedSection(section);
   };
 
   // Add this useEffect for testing
@@ -135,15 +124,29 @@ const Terminal: React.FC<TerminalProps> = ({ onCommandComplete }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleNavClick = (section: string) => {
-    const commands = {
-      intro: "cd /about-me",
-      skills: "ls ./skills",
-      projects: "ls ./projects",
-      contact: "cat contact.txt",
+  const handleNavClick = useCallback(
+    (section: string) => {
+      const commands = {
+        intro: "cd /about-me",
+        skills: "ls ./skills",
+        projects: "ls ./projects",
+        contact: "cat contact.txt",
+      };
+      setManualCommand(commands[section as keyof typeof commands]);
+      setLoadedSection(section); // Ensure the section is loaded on button click
+    },
+    [setLoadedSection]
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Debounce or throttle scroll event handling
+      // Example: Use a timeout to limit how often the scroll event is processed
     };
-    setManualCommand(commands[section as keyof typeof commands]);
-  };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="fixed top-24 right-4 w-[32rem] h-[calc(100vh-8rem)]">
